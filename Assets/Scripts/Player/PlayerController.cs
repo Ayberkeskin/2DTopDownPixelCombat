@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool FacingLeft { get {  return facingLeft; } set { facingLeft = value; } }
+
     [SerializeField] private float moveSpeed = 1f;
 
     Rigidbody2D rb;
@@ -12,6 +14,9 @@ public class PlayerController : MonoBehaviour
     Animator myAnimator;
     SpriteRenderer mySpriteRenderer;
     Vector2 movement;
+
+    private bool facingLeft=false;
+
 
     private void Awake()
     {
@@ -56,9 +61,16 @@ public class PlayerController : MonoBehaviour
         Vector3 playerScreePoint=Camera.main.WorldToScreenPoint(transform.position);
 
         if (mousePos.x<playerScreePoint.x)
+        {
             mySpriteRenderer.flipX = true;
+            FacingLeft = true;
+        }
         else
+        {
             mySpriteRenderer.flipX = false;
+            FacingLeft=false;
+        }
+           
 
     }
 }
